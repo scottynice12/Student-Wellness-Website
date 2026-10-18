@@ -37,21 +37,37 @@
     h1 { font-size: 3rem; margin-bottom: 0.6rem; color: #f3ece2; text-shadow: 3px 3px 8px rgba(0,0,0,0.6), 0 0 30px rgba(200,180,150,0.3); display: flex; align-items: center; gap: 14px; flex-wrap: wrap; font-style: italic; font-weight: 400; }
     .subhead { font-size: 1.3rem; color: #d8cdbf; margin-bottom: 2.2rem; max-width: 750px; text-shadow: 1px 1px 4px rgba(0,0,0,0.5); font-style: italic; border-left: 4px solid #b09b7e; padding-left: 1.5rem; }
     .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin: 2.5rem 0; }
-    .wellness-card { background: rgba(45,60,55,0.55); backdrop-filter: blur(8px); border-radius: 28px; padding: 2rem 1.8rem; border: 1px solid rgba(220,200,170,0.3); box-shadow: 0 20px 35px -12px rgba(0,0,0,0.6), inset 0 1px 4px rgba(255,245,230,0.1); transition: transform 0.3s, box-shadow 0.3s, background 0.3s; color: #f2e8dc; }
+    .wellness-card { background: rgba(45,60,55,0.55); backdrop-filter: blur(8px); border-radius: 28px; padding: 2rem 1.8rem; border: 1px solid rgba(220,200,170,0.3); box-shadow: 0 20px 35px -12px rgba(0,0,0,0.6), inset 0 1px 4px rgba(255,245,230,0.1); transition: transform 0.3s, box-shadow 0.3s, background 0.3s; color: #f2e8dc; display: flex; flex-direction: column; }
     .wellness-card:hover { transform: translateY(-5px); background: rgba(55,75,70,0.7); box-shadow: 0 28px 45px -12px rgba(0,0,0,0.7), inset 0 1px 8px rgba(255,245,230,0.15); }
     .wellness-card h3 { font-size: 1.7rem; margin: 0.6rem 0; color: #f5ede2; font-style: italic; font-weight: 400; text-align: center; }
     .wellness-card h3 i { color: #cbb89b; filter: drop-shadow(0 0 8px rgba(200,180,140,0.4)); margin-right: 8px; }
     .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; background: rgba(70,90,80,0.8); border: 1px solid rgba(210,190,160,0.5); padding: 0.9rem 2rem; border-radius: 50px; font-weight: 400; font-size: 1.15rem; color: #f2e8dc; cursor: pointer; transition: 0.25s; box-shadow: 0 8px 16px -6px rgba(0,0,0,0.5), inset 0 1px 4px rgba(255,245,230,0.2); font-family: 'Cormorant Garamond', serif; letter-spacing: 0.5px; backdrop-filter: blur(4px); }
     .btn i { color: #d4c2a8; }
     .btn:hover { background: rgba(90,120,105,0.9); border-color: #d4c2a8; box-shadow: 0 12px 22px -6px rgba(0,0,0,0.6), inset 0 1px 8px rgba(255,245,230,0.3); transform: scale(1.02); }
-    .breath-circle-container { display: flex; justify-content: center; align-items: center; margin: 2rem 0 1rem; min-height: 220px; }
-    .breath-circle { width: 150px; height: 150px; border-radius: 50%; background: radial-gradient(circle at 30% 30%, #6a8e7f, #2d4a40); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; font-weight: 400; color: #f2ede4; text-shadow: 1px 1px 4px black; box-shadow: 0 0 30px rgba(150,180,140,0.4), inset 0 0 20px rgba(0,0,0,0.5); transition: transform 0.2s ease, background 0.4s, box-shadow 0.4s; border: 1px solid rgba(230,210,180,0.5); backdrop-filter: blur(2px); }
-    .breath-circle.inhale { transform: scale(1.4); background: radial-gradient(circle at 30% 30%, #8fb7a3, #3c6254); box-shadow: 0 0 50px #aacfbb; transition: transform 3.5s ease-in-out, background 1s, box-shadow 1s; }
-    .breath-circle.exhale { transform: scale(1); background: radial-gradient(circle at 30% 30%, #6a8e7f, #2d4a40); transition: transform 4s ease-in-out, background 1s; }
-    .happy-simulator-area { display: flex; flex-direction: column; align-items: center; gap: 1rem; margin-top: 1rem; }
+    
+    /* Breathing Tool Specific */
+    .breath-circle-container { display: flex; justify-content: center; align-items: center; margin: 1rem 0; min-height: 220px; position: relative; }
+    .breath-circle { width: 150px; height: 150px; border-radius: 50%; background: radial-gradient(circle at 30% 30%, #6a8e7f, #2d4a40); display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 1.1rem; font-weight: 400; color: #f2ede4; text-shadow: 1px 1px 4px black; box-shadow: 0 0 30px rgba(150,180,140,0.4), inset 0 0 20px rgba(0,0,0,0.5); transition: transform 0.2s ease, background 0.4s, box-shadow 0.4s; border: 1px solid rgba(230,210,180,0.5); backdrop-filter: blur(2px); z-index: 2; }
+    .breath-timer { font-size: 2rem; font-weight: 500; line-height: 1; margin-top: 4px; color: #fff; }
+    .breath-circle.inhale { transform: scale(1.4); background: radial-gradient(circle at 30% 30%, #8fb7a3, #3c6254); box-shadow: 0 0 50px #aacfbb; transition: transform 4s linear, background 1s, box-shadow 1s; }
+    .breath-circle.hold { transform: scale(1.4); background: radial-gradient(circle at 30% 30%, #8fb7a3, #3c6254); box-shadow: 0 0 50px #aacfbb; }
+    .breath-circle.exhale { transform: scale(1); background: radial-gradient(circle at 30% 30%, #6a8e7f, #2d4a40); transition: transform 4s linear, background 1s; }
+    
+    .btn-row { display: flex; justify-content: center; gap: 10px; margin-top: 1rem; }
+    .btn-stop { background: rgba(120, 70, 70, 0.8); border-color: rgba(220, 150, 150, 0.5); display: none; }
+    .btn-stop:hover { background: rgba(150, 80, 80, 0.9); border-color: #e0a0a0; }
+
+    /* Happy Simulator Specific */
+    .happy-simulator-area { display: flex; flex-direction: column; align-items: center; gap: 1rem; margin-top: 1rem; width: 100%; }
     .smile-icon { font-size: 5rem; color: #f2d98b; text-shadow: 0 0 25px rgba(240,210,120,0.7); transition: transform 0.2s; }
     .count-badge { background: rgba(60,80,70,0.8); padding: 0.4rem 1.4rem; border-radius: 60px; font-weight: 400; color: #f2e8dc; border: 1px solid #b09b7e; font-size: 1.1rem; }
-    .verse-companion { margin-top: 1.4rem; padding: 1.1rem 1.3rem; border-radius: 20px; background: rgba(35,50,45,0.65); border-left: 6px solid #b09b7e; font-style: italic; color: #f0e7db; font-size: 1.02rem; text-align: left; }
+    
+    .smile-input-group { display: flex; gap: 10px; width: 100%; max-width: 250px; margin-top: 0.5rem; }
+    .smile-input-group input { flex: 1; padding: 0.8rem; border-radius: 12px; border: 1px solid #8a7f6c; background: rgba(30,45,40,0.8); color: #f0e7db; font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; text-align: center; outline: none; }
+    .smile-input-group input:focus { border-color: #d4c2a8; }
+    .smile-input-group .btn { padding: 0.8rem 1.2rem; font-size: 1rem; }
+
+    .verse-companion { margin-top: auto; padding: 1.1rem 1.3rem; border-radius: 20px; background: rgba(35,50,45,0.65); border-left: 6px solid #b09b7e; font-style: italic; color: #f0e7db; font-size: 1.02rem; text-align: left; width: 100%; }
     .verse-companion .vref { display: block; margin-top: 0.45rem; font-style: normal; color: #cbb89b; font-size: 0.95rem; }
     footer { text-align: center; padding: 2.2rem 1.5rem 1.8rem; color: #b9ad9a; font-size: 1rem; border-top: 1px solid rgba(200,180,150,0.2); margin-top: 2rem; font-style: italic; text-shadow: 1px 1px 3px black; letter-spacing: 0.5px; }
     footer a { color: #d4c2a8; text-decoration: none; border-bottom: 1px dotted #b09b7e; }
@@ -77,13 +93,23 @@
   <p class="subhead">Breathe with the circle or lift your mood with the happy simulator.</p>
 
   <div class="card-grid">
+    <!-- Breathing Tool -->
     <div class="wellness-card" style="text-align:center;">
       <h3><i class="fas fa-lungs"></i> Breathing buddy</h3>
+      <p style="font-size:0.95rem; color:#cbb89b; margin-bottom: 0;">Inhale 4s → hold 4s → exhale 4s</p>
+      
       <div class="breath-circle-container">
-        <div id="breathCircle" class="breath-circle">Breathe</div>
+        <div id="breathCircle" class="breath-circle">
+          <span id="breathLabel">Ready</span>
+          <span id="breathTimer" class="breath-timer">0</span>
+        </div>
       </div>
-      <button id="startBreathBtn" class="btn"><i class="fas fa-play"></i> Start 4‑4‑4 breathing</button>
-      <p style="margin-top:0.8rem; font-size:0.95rem; color:#cbb89b;">Inhale 4s → hold 4s → exhale 4s</p>
+      
+      <div class="btn-row">
+        <button id="startBreathBtn" class="btn"><i class="fas fa-play"></i> Start</button>
+        <button id="stopBreathBtn" class="btn btn-stop"><i class="fas fa-stop"></i> Stop</button>
+      </div>
+
       <div class="verse-companion" id="breathVerse">
         <i class="fas fa-quote-left" style="color:#cbb89b; margin-right:6px;"></i>
         <span id="breathVerseText">Be still, and know that I am God.</span>
@@ -91,14 +117,20 @@
       </div>
     </div>
 
+    <!-- Happy Simulator -->
     <div class="wellness-card" style="text-align:center;">
       <h3><i class="fas fa-face-smile"></i> Happy simulator</h3>
+      
       <div class="happy-simulator-area">
         <div class="smile-icon" id="smileIcon">😊</div>
         <div class="count-badge" id="smileCount">0 smiles shared</div>
-        <button id="smileBtn" class="btn"><i class="fas fa-plus-circle"></i> Send a smile</button>
+        
+        <div class="smile-input-group">
+          <input type="number" id="smileAmount" value="1" min="1" max="100">
+          <button id="smileBtn" class="btn"><i class="fas fa-plus"></i> Add</button>
+        </div>
       </div>
-      <p style="margin-top:1rem; font-size:0.95rem; color:#cbb89b;">Each click adds a little joy.</p>
+
       <div class="verse-companion" id="smileVerse">
         <i class="fas fa-quote-left" style="color:#cbb89b; margin-right:6px;"></i>
         <span id="smileVerseText">A cheerful heart is good medicine.</span>
@@ -118,78 +150,113 @@
 <script src="js/app.js"></script>
 <script>
   document.addEventListener('DOMContentLoaded', function() {
+    // ==========================================
+    // 1. BREATHING TOOL (With Timer & Stop)
+    // ==========================================
     const breathVerse = window.wellnessUtils.getVerseByMood('anxious');
     if (breathVerse) {
       document.getElementById('breathVerseText').textContent = breathVerse.text;
       document.getElementById('breathVerseRef').textContent = '— ' + breathVerse.ref;
     }
-    const smileVerse = window.wellnessUtils.getVerseByMood('grateful');
-    if (smileVerse) {
-      document.getElementById('smileVerseText').textContent = smileVerse.text;
-      document.getElementById('smileVerseRef').textContent = '— ' + smileVerse.ref;
-    }
 
     const breathCircle = document.getElementById('breathCircle');
+    const breathLabel = document.getElementById('breathLabel');
+    const breathTimer = document.getElementById('breathTimer');
     const startBtn = document.getElementById('startBreathBtn');
+    const stopBtn = document.getElementById('stopBreathBtn');
+    
     let breathInterval = null;
-    let breathPhase = 0;
+    let countdownInterval = null;
+    let breathPhase = 0; // 0=Inhale, 1=Hold, 2=Exhale
+    let currentSeconds = 0;
+    let isRunning = false;
 
-    function resetBreathing() {
-      if (breathInterval) { clearInterval(breathInterval); breathInterval = null; }
-      if (breathCircle) {
-        breathCircle.className = 'breath-circle';
-        breathCircle.textContent = 'Breathe';
-        breathCircle.style.transform = '';
-        breathCircle.style.transition = '';
-      }
+    function updateBreathUI() {
+      breathTimer.textContent = currentSeconds;
     }
 
-    function startBreathingCycle() {
-      resetBreathing();
-      if (!breathCircle) return;
-      breathPhase = 0;
-      breathCircle.textContent = 'Inhale...';
-      breathCircle.classList.add('inhale');
-      breathCircle.classList.remove('exhale');
-
-      const refreshBreathVerse = () => {
+    function nextPhase() {
+      if (breathPhase === 0) {
+        // Transition to Hold
+        breathPhase = 1;
+        breathLabel.textContent = 'Hold...';
+        breathCircle.className = 'breath-circle hold';
+        currentSeconds = 0;
+        updateBreathUI();
+      } else if (breathPhase === 1) {
+        // Transition to Exhale
+        breathPhase = 2;
+        breathLabel.textContent = 'Exhale...';
+        breathCircle.className = 'breath-circle exhale';
+        currentSeconds = 0;
+        updateBreathUI();
+        // Refresh verse at start of exhale
         const v = window.wellnessUtils.getVerseByMood('anxious');
         if (v) {
           document.getElementById('breathVerseText').textContent = v.text;
           document.getElementById('breathVerseRef').textContent = '— ' + v.ref;
         }
-      };
-
-      breathInterval = setInterval(() => {
-        if (breathPhase === 0) {
-          breathPhase = 1;
-          breathCircle.textContent = 'Hold...';
-          breathCircle.classList.remove('inhale');
-          breathCircle.style.transform = 'scale(1.4)';
-          breathCircle.style.transition = 'transform 1s';
-        } else if (breathPhase === 1) {
-          breathPhase = 2;
-          breathCircle.textContent = 'Exhale...';
-          breathCircle.classList.remove('inhale');
-          breathCircle.classList.add('exhale');
-          breathCircle.style.transform = 'scale(1)';
-          breathCircle.style.transition = 'transform 1s';
-        } else if (breathPhase === 2) {
-          breathPhase = 0;
-          breathCircle.textContent = 'Inhale...';
-          breathCircle.classList.remove('exhale');
-          breathCircle.classList.add('inhale');
-          breathCircle.style.transform = '';
-          breathCircle.style.transition = '';
-          refreshBreathVerse();
-        }
-      }, 4000);
+      } else if (breathPhase === 2) {
+        // Transition back to Inhale
+        breathPhase = 0;
+        breathLabel.textContent = 'Inhale...';
+        breathCircle.className = 'breath-circle inhale';
+        currentSeconds = 0;
+        updateBreathUI();
+      }
     }
 
-    if (startBtn) startBtn.addEventListener('click', startBreathingCycle);
+    function startBreathing() {
+      if (isRunning) return;
+      isRunning = true;
+      
+      // UI Toggle
+      startBtn.style.display = 'none';
+      stopBtn.style.display = 'inline-flex';
+      
+      // Init Phase
+      breathPhase = 0;
+      breathLabel.textContent = 'Inhale...';
+      breathCircle.className = 'breath-circle inhale';
+      currentSeconds = 0;
+      updateBreathUI();
 
+      // Main phase timer (4 seconds each phase)
+      breathInterval = setInterval(() => {
+        nextPhase();
+      }, 4000);
+
+      // Countdown timer (updates every second)
+      countdownInterval = setInterval(() => {
+        currentSeconds++;
+        // Cap at 4 for visual display
+        breathTimer.textContent = Math.min(currentSeconds, 4);
+      }, 1000);
+    }
+
+    function stopBreathing() {
+      isRunning = false;
+      clearInterval(breathInterval);
+      clearInterval(countdownInterval);
+      
+      breathCircle.className = 'breath-circle';
+      breathLabel.textContent = 'Ready';
+      breathTimer.textContent = '0';
+      
+      startBtn.style.display = 'inline-flex';
+      stopBtn.style.display = 'none';
+    }
+
+    if (startBtn) startBtn.addEventListener('click', startBreathing);
+    if (stopBtn) stopBtn.addEventListener('click', stopBreathing);
+
+
+    // ==========================================
+    // 2. HAPPY SIMULATOR (With Input Amount)
+    // ==========================================
     let smileCounter = 0;
     const smileBtn = document.getElementById('smileBtn');
+    const smileInput = document.getElementById('smileAmount');
     const smileIcon = document.getElementById('smileIcon');
     const smileCount = document.getElementById('smileCount');
 
@@ -205,26 +272,49 @@
     ];
 
     function updateSmileDisplay() {
+      // Update text
       if (smileCount) smileCount.textContent = `${smileCounter} smile${smileCounter !== 1 ? 's' : ''} shared`;
+      
+      // Update emoji based on exact count
       if (smileIcon) {
         const emojis = ['😊', '😄', '🌟', '💖', '🌸', '✨', '😁', '🥰'];
-        smileIcon.textContent = emojis[smileCounter % emojis.length];
+        smileIcon.textContent = emojis[Math.floor(smileCounter / 5) % emojis.length];
       }
-      const v = smileVerses[smileCounter % smileVerses.length];
+      
+      // Update verse based on count
+      const v = smileVerses[Math.floor(smileCounter / 10) % smileVerses.length];
       document.getElementById('smileVerseText').textContent = v.text;
       document.getElementById('smileVerseRef').textContent = '— ' + v.ref;
     }
 
     if (smileBtn) {
       smileBtn.addEventListener('click', () => {
-        smileCounter++;
+        let amount = parseInt(smileInput.value);
+        
+        // Validation: Make sure it's a positive number
+        if (isNaN(amount) || amount < 1) {
+          amount = 1;
+          smileInput.value = 1;
+        }
+        
+        // Cap at a reasonable amount per click to prevent lag
+        if (amount > 100) {
+          amount = 100;
+          smileInput.value = 100;
+        }
+
+        smileCounter += amount;
         updateSmileDisplay();
+        
+        // Bounce animation
         if (smileIcon) {
-          smileIcon.style.transform = 'scale(1.2)';
+          smileIcon.style.transform = 'scale(1.3)';
           setTimeout(() => smileIcon.style.transform = 'scale(1)', 150);
         }
       });
     }
+
+    // Initialize displays on load
     updateSmileDisplay();
   });
 </script>
