@@ -40,9 +40,12 @@
     .verse-display i { color: #cbb89b; margin-right: 10px; font-style: normal; filter: drop-shadow(0 0 6px rgba(200,170,120,0.5)); }
     .verse-text { font-size: 1.6rem; line-height: 1.5; text-shadow: 1px 1px 4px rgba(0,0,0,0.4); }
     .verse-ref { display: block; margin-top: 1rem; font-style: normal; font-weight: 400; color: #cbb89b; font-size: 1.2rem; letter-spacing: 0.5px; }
-    .mood-row { display: flex; flex-wrap: wrap; gap: 0.7rem; margin: 1.5rem 0 0.5rem; }
-    .mood-chip { background: rgba(70,90,80,0.6); border: 1px solid rgba(210,190,160,0.4); color: #ede3d6; padding: 0.45rem 1.1rem; border-radius: 40px; cursor: pointer; font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; transition: 0.2s; }
-    .mood-chip:hover { background: rgba(90,120,105,0.9); border-color: #d4c2a8; }
+    
+    /* Updated Mood Sentence Styling */
+    .mood-sentence { margin: 1.5rem 0; font-size: 1.25rem; color: #d8cdbf; line-height: 2.2; }
+    .mood-word { color: #e6dccf; cursor: pointer; font-style: italic; font-weight: 500; padding: 0.2rem 0.3rem; border-bottom: 1px dashed transparent; transition: all 0.2s ease; }
+    .mood-word:hover { color: #fff5e8; border-bottom-color: #cbb89b; text-shadow: 0 0 10px rgba(240,220,180,0.4); }
+
     .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin: 2.5rem 0; }
     .wellness-card { background: rgba(45,60,55,0.55); backdrop-filter: blur(8px); border-radius: 28px; padding: 2rem 1.8rem; border: 1px solid rgba(220,200,170,0.3); box-shadow: 0 20px 35px -12px rgba(0,0,0,0.6), inset 0 1px 4px rgba(255,245,230,0.1); transition: transform 0.3s, box-shadow 0.3s, background 0.3s; color: #f2e8dc; }
     .wellness-card:hover { transform: translateY(-5px); background: rgba(55,75,70,0.7); box-shadow: 0 28px 45px -12px rgba(0,0,0,0.7), inset 0 1px 8px rgba(255,245,230,0.15); }
@@ -55,7 +58,7 @@
     footer { text-align: center; padding: 2.2rem 1.5rem 1.8rem; color: #b9ad9a; font-size: 1rem; border-top: 1px solid rgba(200,180,150,0.2); margin-top: 2rem; font-style: italic; text-shadow: 1px 1px 3px black; letter-spacing: 0.5px; }
     footer a { color: #d4c2a8; text-decoration: none; border-bottom: 1px dotted #b09b7e; }
     footer a:hover { color: #f5ede2; }
-    @media (max-width: 700px) { .nav-menu { gap: 1.2rem; } h1 { font-size: 2.3rem; } .verse-text { font-size: 1.4rem; } }
+    @media (max-width: 700px) { .nav-menu { gap: 1.2rem; } h1 { font-size: 2.3rem; } .verse-text { font-size: 1.4rem; } .mood-sentence { font-size: 1.15rem; } }
   </style>
 </head>
 <body>
@@ -81,20 +84,19 @@
     <span class="verse-ref" id="dailyVerseRef"></span>
   </div>
 
-  <div style="margin-top: 0.5rem;">
-    <p style="font-size:1.1rem; color:#cbb89b; font-style:italic; margin-bottom:0.6rem;">How are you feeling right now?</p>
-    <div class="mood-row">
-      <button class="mood-chip" data-mood="anxious">😰 Anxious</button>
-      <button class="mood-chip" data-mood="sad">😔 Sad</button>
-      <button class="mood-chip" data-mood="lonely">🫂 Lonely</button>
-      <button class="mood-chip" data-mood="tired">😴 Tired</button>
-      <button class="mood-chip" data-mood="grateful">🙏 Grateful</button>
-      <button class="mood-chip" data-mood="hopeful">🌱 Hopeful</button>
-      <button class="mood-chip" data-mood="loved">💗 Loved</button>
-      <button class="mood-chip" data-mood="grieving">🕊️ Grieving</button>
-      <button class="mood-chip" data-mood="weak">🫶 Weak</button>
-      <button class="mood-chip" data-mood="fearful">😨 Fearful</button>
-    </div>
+  <!-- Updated Mood Sentence -->
+  <div class="mood-sentence">
+    How are you feeling right now? 
+    <span class="mood-word" data-mood="anxious">😰 Anxious</span>, 
+    <span class="mood-word" data-mood="sad">😔 Sad</span>, 
+    <span class="mood-word" data-mood="lonely">🫂 Lonely</span>, 
+    <span class="mood-word" data-mood="tired">😴 Tired</span>, 
+    <span class="mood-word" data-mood="grateful">🙏 Grateful</span>, 
+    <span class="mood-word" data-mood="hopeful">🌱 Hopeful</span>, 
+    <span class="mood-word" data-mood="loved">💗 Loved</span>, 
+    <span class="mood-word" data-mood="grieving">🕊️ Grieving</span>, 
+    <span class="mood-word" data-mood="weak">🫶 Weak</span>, 
+    or <span class="mood-word" data-mood="fearful">😨 Fearful</span>?
   </div>
 
   <div class="card-grid">
@@ -129,8 +131,10 @@
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     window.wellnessUtils.renderDailyVerse('dailyVerseText', 'dailyVerseRef');
-    document.querySelectorAll('.mood-chip').forEach(chip => {
-      chip.addEventListener('click', function() {
+    
+    // Attach the click event to the new text words
+    document.querySelectorAll('.mood-word').forEach(word => {
+      word.addEventListener('click', function() {
         window.wellnessUtils.showMoodVerse(this.dataset.mood, 'dailyVerseText', 'dailyVerseRef');
       });
     });
