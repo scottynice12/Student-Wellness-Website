@@ -1,0 +1,89 @@
+<!-- verses.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Wellness Source — Verses</title>
+  <meta name="description" content="A curated collection of Bible verses for anxiety, depression, loneliness, grief, and hope — words to steady your heart on hard days.">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      min-height: 100vh;
+      background-color: #1a2a2a;
+      background-image:
+        radial-gradient(circle at 20% 30%, rgba(210,180,140,0.15) 0%, transparent 30%),
+        radial-gradient(circle at 80% 70%, rgba(140,180,170,0.15) 0%, transparent 35%),
+        radial-gradient(circle at 40% 80%, rgba(200,160,130,0.12) 0%, transparent 40%),
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 300 300"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0.2"/></filter><rect width="300" height="300" filter="url(%23noise)" opacity="0.06"/></svg>');
+      background-blend-mode: overlay, overlay, overlay, normal;
+      font-family: 'Cormorant Garamond', 'Georgia', serif;
+      color: #f0ebe4; line-height: 1.6; display: flex; flex-direction: column;
+    }
+    body::before { content:""; position:fixed; top:0; left:0; right:0; bottom:0; pointer-events:none;
+      background: repeating-linear-gradient(45deg, rgba(255,240,220,0.01) 0px, rgba(255,240,220,0.01) 2px, transparent 2px, transparent 6px);
+      z-index:0; }
+    .nav-container, .main-content, footer { position: relative; z-index: 2; }
+    .nav-container { background: rgba(30,45,45,0.55); backdrop-filter: blur(6px); border-bottom: 1px solid rgba(220,200,170,0.25); box-shadow: 0 8px 20px -8px rgba(0,0,0,0.5); padding: 0.8rem 1.5rem; position: sticky; top: 0; z-index: 30; }
+    .nav-links { max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; }
+    .logo { font-weight: 400; font-size: 1.8rem; letter-spacing: 1px; color: #ebdfd0; text-shadow: 2px 2px 4px rgba(0,0,0,0.5), 0 0 20px rgba(220,200,170,0.3); display: flex; align-items: center; gap: 10px; font-style: italic; }
+    .logo i { color: #b8cfc0; font-size: 1.8rem; filter: drop-shadow(0 0 6px rgba(180,210,190,0.6)); }
+    .nav-menu { display: flex; gap: 2rem; flex-wrap: wrap; }
+    .nav-menu a { text-decoration: none; color: #ede3d6; font-weight: 400; font-size: 1.2rem; padding: 0.3rem 0; border-bottom: 2px solid transparent; transition: 0.25s ease; text-shadow: 1px 1px 3px rgba(0,0,0,0.5); letter-spacing: 0.5px; }
+    .nav-menu a:hover, .nav-menu a.active { border-bottom-color: #cbb89b; color: #fff5e8; text-shadow: 0 0 12px rgba(240,220,180,0.5); }
+    .main-content { max-width: 1200px; margin: 2.5rem auto 2rem; padding: 0 1.8rem; flex: 1; }
+    h1 { font-size: 3rem; margin-bottom: 0.6rem; color: #f3ece2; text-shadow: 3px 3px 8px rgba(0,0,0,0.6), 0 0 30px rgba(200,180,150,0.3); display: flex; align-items: center; gap: 14px; flex-wrap: wrap; font-style: italic; font-weight: 400; }
+    .subhead { font-size: 1.3rem; color: #d8cdbf; margin-bottom: 2.2rem; max-width: 750px; text-shadow: 1px 1px 4px rgba(0,0,0,0.5); font-style: italic; border-left: 4px solid #b09b7e; padding-left: 1.5rem; }
+    .verse-list { display: flex; flex-direction: column; gap: 1.8rem; }
+    .verse-item { background: rgba(40,55,50,0.6); backdrop-filter: blur(6px); border-radius: 24px; padding: 1.8rem 2rem; border-left: 8px solid #b09b7e; box-shadow: 0 16px 28px -10px rgba(0,0,0,0.5); font-style: italic; color: #f0e7db; }
+    .verse-item p { font-size: 1.35rem; text-shadow: 1px 1px 3px rgba(0,0,0,0.4); }
+    .verse-item .ref { margin-top: 0.8rem; font-weight: 400; color: #cbb89b; font-style: normal; font-size: 1.1rem; }
+    footer { text-align: center; padding: 2.2rem 1.5rem 1.8rem; color: #b9ad9a; font-size: 1rem; border-top: 1px solid rgba(200,180,150,0.2); margin-top: 2rem; font-style: italic; text-shadow: 1px 1px 3px black; letter-spacing: 0.5px; }
+    footer a { color: #d4c2a8; text-decoration: none; border-bottom: 1px dotted #b09b7e; }
+    footer a:hover { color: #f5ede2; }
+    @media (max-width: 700px) { .nav-menu { gap: 1.2rem; } h1 { font-size: 2.3rem; } }
+  </style>
+</head>
+<body>
+<div class="nav-container">
+  <div class="nav-links">
+    <div class="logo"><i class="fas fa-leaf"></i> wellness hub</div>
+    <div class="nav-menu">
+      <a href="index.html">🏡 Home</a>
+      <a href="verses.html" class="active">📖 Verses</a>
+      <a href="simulators.html">🌬️ Simulators</a>
+      <a href="self-love.html">💗 Self‑Love</a>
+    </div>
+  </div>
+</div>
+
+<div class="main-content">
+  <h1><i class="fas fa-book-open"></i> Verses for Your Heart</h1>
+  <p class="subhead">Words of hope and strength for anxiety, depression, loneliness, grief, and every hard day in between.</p>
+  <div id="versesList" class="verse-list"></div>
+</div>
+
+<footer>
+  <i class="fas fa-leaf"></i> Student Wellness Source ·
+  <a href="https://StudentWellnessSource.com">StudentWellnessSource.com</a> ·
+  made with care · all data stays in your browser
+</footer>
+
+<script src="js/verses-data.js"></script>
+<script src="js/app.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const container = document.getElementById('versesList');
+    if (!container || typeof versesData === 'undefined') return;
+    container.innerHTML = versesData.map(v => `
+      <div class="verse-item">
+        <p><i class="fas fa-quote-left" style="color:#cbb89b; margin-right:8px;"></i>${v.text}</p>
+        <div class="ref">— ${v.ref}</div>
+      </div>
+    `).join('');
+  });
+</script>
+</body>
+</html>
