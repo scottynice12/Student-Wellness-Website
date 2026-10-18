@@ -1,0 +1,219 @@
+<!-- self-love.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Wellness Source — Self‑Love Journal</title>
+  <meta name="description" content="A private, browser-local journal with gentle prompts and Scripture to help you reflect with kindness toward yourself. No account needed.">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      min-height: 100vh;
+      background-color: #1a2a2a;
+      background-image:
+        radial-gradient(circle at 20% 30%, rgba(210,180,140,0.15) 0%, transparent 30%),
+        radial-gradient(circle at 80% 70%, rgba(140,180,170,0.15) 0%, transparent 35%),
+        radial-gradient(circle at 40% 80%, rgba(200,160,130,0.12) 0%, transparent 40%),
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 300 300"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0.2"/></filter><rect width="300" height="300" filter="url(%23noise)" opacity="0.06"/></svg>');
+      background-blend-mode: overlay, overlay, overlay, normal;
+      font-family: 'Cormorant Garamond', 'Georgia', serif;
+      color: #f0ebe4; line-height: 1.6; display: flex; flex-direction: column;
+    }
+    body::before { content:""; position:fixed; top:0; left:0; right:0; bottom:0; pointer-events:none;
+      background: repeating-linear-gradient(45deg, rgba(255,240,220,0.01) 0px, rgba(255,240,220,0.01) 2px, transparent 2px, transparent 6px);
+      z-index:0; }
+    .nav-container, .main-content, footer { position: relative; z-index: 2; }
+    .nav-container { background: rgba(30,45,45,0.55); backdrop-filter: blur(6px); border-bottom: 1px solid rgba(220,200,170,0.25); box-shadow: 0 8px 20px -8px rgba(0,0,0,0.5); padding: 0.8rem 1.5rem; position: sticky; top: 0; z-index: 30; }
+    .nav-links { max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; }
+    .logo { font-weight: 400; font-size: 1.8rem; letter-spacing: 1px; color: #ebdfd0; text-shadow: 2px 2px 4px rgba(0,0,0,0.5), 0 0 20px rgba(220,200,170,0.3); display: flex; align-items: center; gap: 10px; font-style: italic; }
+    .logo i { color: #b8cfc0; font-size: 1.8rem; filter: drop-shadow(0 0 6px rgba(180,210,190,0.6)); }
+    .nav-menu { display: flex; gap: 2rem; flex-wrap: wrap; }
+    .nav-menu a { text-decoration: none; color: #ede3d6; font-weight: 400; font-size: 1.2rem; padding: 0.3rem 0; border-bottom: 2px solid transparent; transition: 0.25s ease; text-shadow: 1px 1px 3px rgba(0,0,0,0.5); letter-spacing: 0.5px; }
+    .nav-menu a:hover, .nav-menu a.active { border-bottom-color: #cbb89b; color: #fff5e8; text-shadow: 0 0 12px rgba(240,220,180,0.5); }
+    .main-content { max-width: 1200px; margin: 2.5rem auto 2rem; padding: 0 1.8rem; flex: 1; }
+    h1 { font-size: 3rem; margin-bottom: 0.6rem; color: #f3ece2; text-shadow: 3px 3px 8px rgba(0,0,0,0.6), 0 0 30px rgba(200,180,150,0.3); display: flex; align-items: center; gap: 14px; flex-wrap: wrap; font-style: italic; font-weight: 400; }
+    h1 i { color: #cbb89b; filter: drop-shadow(0 0 10px rgba(200,180,140,0.5)); }
+    .subhead { font-size: 1.3rem; color: #d8cdbf; margin-bottom: 2.2rem; max-width: 750px; text-shadow: 1px 1px 4px rgba(0,0,0,0.5); font-style: italic; border-left: 4px solid #b09b7e; padding-left: 1.5rem; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; background: rgba(70,90,80,0.8); border: 1px solid rgba(210,190,160,0.5); padding: 0.9rem 2rem; border-radius: 50px; font-weight: 400; font-size: 1.15rem; color: #f2e8dc; cursor: pointer; transition: 0.25s; box-shadow: 0 8px 16px -6px rgba(0,0,0,0.5), inset 0 1px 4px rgba(255,245,230,0.2); font-family: 'Cormorant Garamond', serif; letter-spacing: 0.5px; backdrop-filter: blur(4px); }
+    .btn i { color: #d4c2a8; }
+    .btn:hover { background: rgba(90,120,105,0.9); border-color: #d4c2a8; box-shadow: 0 12px 22px -6px rgba(0,0,0,0.6), inset 0 1px 8px rgba(255,245,230,0.3); transform: scale(1.02); }
+    .prompt-box { background: rgba(40,55,50,0.6); backdrop-filter: blur(6px); border-radius: 24px; padding: 1.8rem; margin-bottom: 1.8rem; border: 1px solid rgba(200,180,150,0.35); box-shadow: 0 12px 22px -8px rgba(0,0,0,0.5); }
+    .prompt-text { font-size: 1.4rem; font-weight: 400; margin-bottom: 0.4rem; color: #f5ede2; font-style: italic; }
+    .prompt-verse { font-size: 1rem; color: #cbb89b; font-style: italic; margin-bottom: 1.2rem; }
+    .prompt-verse .vref { color: #b09b7e; font-style: normal; }
+    .prompt-picker { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 1.2rem; }
+    .prompt-chip { background: rgba(70,90,80,0.6); border: 1px solid rgba(210,190,160,0.4); color: #ede3d6; padding: 0.4rem 1rem; border-radius: 40px; cursor: pointer; font-family: 'Cormorant Garamond', serif; font-size: 1rem; transition: 0.2s; }
+    .prompt-chip:hover { background: rgba(90,120,105,0.9); border-color: #d4c2a8; }
+    .prompt-chip.active { background: rgba(120,150,135,0.95); border-color: #f5ede2; color: #fff; }
+    textarea { width: 100%; border-radius: 20px; border: 1px solid #8a7f6c; padding: 1.2rem; font-size: 1.1rem; resize: vertical; background: rgba(30,45,40,0.8); color: #f0e7db; min-height: 120px; outline: none; transition: 0.2s; font-family: 'Cormorant Garamond', serif; backdrop-filter: blur(4px); }
+    textarea:focus { border-color: #d4c2a8; box-shadow: 0 0 0 4px rgba(180,160,120,0.3); background: rgba(40,60,55,0.9); }
+    .saved-entries { background: rgba(35,50,45,0.6); backdrop-filter: blur(6px); border-radius: 24px; padding: 1.8rem; margin-top: 1.8rem; border: 1px solid rgba(200,180,150,0.3); }
+    .saved-entries h3 { font-size: 1.6rem; font-style: italic; font-weight: 400; color: #f5ede2; margin-bottom: 1rem; }
+    .saved-entries h3 i { color: #cbb89b; margin-right: 8px; }
+    .entry-item { background: rgba(50,70,60,0.7); border-radius: 18px; padding: 1rem 1.3rem; margin-bottom: 1rem; border-left: 5px solid #b09b7e; color: #f2e8dc; word-break: break-word; backdrop-filter: blur(4px); }
+    .entry-date { font-size: 0.9rem; color: #cbb89b; margin-bottom: 0.4rem; font-style: italic; }
+    .entry-prompt { font-size: 0.9rem; color: #a8c4b8; margin-bottom: 0.35rem; font-style: italic; }
+    .flex-row { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; justify-content: space-between; }
+    footer { text-align: center; padding: 2.2rem 1.5rem 1.8rem; color: #b9ad9a; font-size: 1rem; border-top: 1px solid rgba(200,180,150,0.2); margin-top: 2rem; font-style: italic; text-shadow: 1px 1px 3px black; letter-spacing: 0.5px; }
+    footer a { color: #d4c2a8; text-decoration: none; border-bottom: 1px dotted #b09b7e; }
+    footer a:hover { color: #f5ede2; }
+    @media (max-width: 700px) { .nav-menu { gap: 1.2rem; } h1 { font-size: 2.3rem; } }
+  </style>
+</head>
+<body>
+<div class="nav-container">
+  <div class="nav-links">
+    <div class="logo"><i class="fas fa-leaf"></i> wellness hub</div>
+    <div class="nav-menu">
+      <a href="index.html">🏡 Home</a>
+      <a href="verses.html">📖 Verses</a>
+      <a href="simulators.html">🌬️ Simulators</a>
+      <a href="self-love.html" class="active">💗 Self‑Love</a>
+    </div>
+  </div>
+</div>
+
+<div class="main-content">
+  <h1><i class="fas fa-heart-circle"></i> Self‑Love Journal</h1>
+  <p class="subhead">Prompts to help you reflect, release, and be kind to yourself.</p>
+
+  <div class="prompt-box">
+    <div class="prompt-text" id="currentPrompt"><i class="fas fa-lightbulb"></i> Today, I am proud of...</div>
+    <div class="prompt-verse" id="promptVerse">
+      <i class="fas fa-book" style="color:#cbb89b; margin-right:4px;"></i>
+      <span id="promptVerseText">I praise you because I am fearfully and wonderfully made.</span>
+      <span class="vref" id="promptVerseRef">— Psalm 139:14</span>
+    </div>
+    <div class="prompt-picker" id="promptPicker"></div>
+    <textarea id="journalInput" placeholder="Write anything that comes to mind..."></textarea>
+    <div class="flex-row" style="margin-top:1.2rem;">
+      <button id="saveEntryBtn" class="btn"><i class="fas fa-save"></i> Save entry</button>
+      <span id="saveStatus" style="color:#d4c2a8; font-size:1rem; font-style:italic;"></span>
+    </div>
+  </div>
+
+  <div class="saved-entries">
+    <h3><i class="fas fa-bookmark"></i> Your saved reflections</h3>
+    <div id="entriesContainer">
+      <p style="color:#cbb89b; font-style:italic;">No entries yet. Write your first note above.</p>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <i class="fas fa-leaf"></i> Student Wellness Source ·
+  <a href="https://StudentWellnessSource.com">StudentWellnessSource.com</a> ·
+  made with care · all data stays in your browser
+</footer>
+
+<script src="js/verses-data.js"></script>
+<script src="js/app.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const prompts = [
+      { text: "Today, I am proud of...", mood: 'grateful' },
+      { text: "Something I'm anxious about that I can hand to God...", mood: 'anxious' },
+      { text: "A hard feeling I'm carrying right now...", mood: 'sad' },
+      { text: "Someone or something that made me feel loved...", mood: 'loved' },
+      { text: "A small hope I'm holding onto...", mood: 'hopeful' },
+      { text: "A way I showed myself kindness today...", mood: 'loved' },
+      { text: "A loss or grief I need to sit with...", mood: 'grieving' },
+      { text: "A place where I feel weak, and what I need...", mood: 'weak' },
+      { text: "Something I can let go of tonight...", mood: 'tired' },
+      { text: "A fear I want to bring into the light...", mood: 'fearful' },
+      { text: "A moment of loneliness, and who I can reach out to...", mood: 'lonely' }
+    ];
+
+    let currentPromptObj = prompts[0];
+    const picker = document.getElementById('promptPicker');
+    const currentPromptEl = document.getElementById('currentPrompt');
+    const promptVerseText = document.getElementById('promptVerseText');
+    const promptVerseRef = document.getElementById('promptVerseRef');
+
+    function selectPrompt(promptObj, chipEl) {
+      currentPromptObj = promptObj;
+      currentPromptEl.innerHTML = '<i class="fas fa-lightbulb"></i> ' + promptObj.text;
+      const v = window.wellnessUtils.getVerseByMood(promptObj.mood);
+      if (v) {
+        promptVerseText.textContent = v.text;
+        promptVerseRef.textContent = '— ' + v.ref;
+      }
+      document.querySelectorAll('.prompt-chip').forEach(c => c.classList.remove('active'));
+      if (chipEl) chipEl.classList.add('active');
+    }
+
+    prompts.forEach((p, i) => {
+      const chip = document.createElement('button');
+      chip.className = 'prompt-chip' + (i === 0 ? ' active' : '');
+      chip.textContent = p.text.length > 34 ? p.text.slice(0, 32) + '…' : p.text;
+      chip.title = p.text;
+      chip.addEventListener('click', () => selectPrompt(p, chip));
+      picker.appendChild(chip);
+    });
+    selectPrompt(prompts[0], picker.querySelector('.prompt-chip'));
+
+    function escapeHtml(unsafe) {
+      return String(unsafe)
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;').replace(/'/g, '&#039;');
+    }
+
+    function loadEntries() {
+      const container = document.getElementById('entriesContainer');
+      if (!container) return;
+      const saved = localStorage.getItem('wellnessJournalEntries');
+      if (!saved) {
+        container.innerHTML = '<p style="color:#cbb89b; font-style:italic;">No entries yet. Write your first note above.</p>';
+        return;
+      }
+      try {
+        const entries = JSON.parse(saved);
+        if (!entries.length) {
+          container.innerHTML = '<p style="color:#cbb89b; font-style:italic;">No entries yet. Write your first note above.</p>';
+          return;
+        }
+        container.innerHTML = entries.map(entry => `
+          <div class="entry-item">
+            <div class="entry-date"><i class="far fa-calendar-alt"></i> ${escapeHtml(entry.date)}</div>
+            ${entry.prompt ? `<div class="entry-prompt"><i class="fas fa-lightbulb"></i> ${escapeHtml(entry.prompt)}</div>` : ''}
+            <div>${escapeHtml(entry.text)}</div>
+          </div>
+        `).join('');
+      } catch(e) {
+        container.innerHTML = '<p style="color:#cbb89b;">Could not load entries.</p>';
+      }
+    }
+
+    function saveEntry() {
+      const input = document.getElementById('journalInput');
+      if (!input) return;
+      const text = input.value.trim();
+      if (!text) { alert('Write something before saving 💭'); return; }
+      const saved = localStorage.getItem('wellnessJournalEntries');
+      let entries = [];
+      if (saved) { try { entries = JSON.parse(saved); } catch(e) { entries = []; } }
+      const now = new Date();
+      const dateStr = now.toLocaleDateString('en-US', { month:'short', day:'numeric', year:'numeric', hour:'2-digit', minute:'2-digit' });
+      entries.unshift({
+        text: text,
+        date: dateStr,
+        prompt: currentPromptObj ? currentPromptObj.text : ''
+      });
+      if (entries.length > 50) entries = entries.slice(0, 50);
+      localStorage.setItem('wellnessJournalEntries', JSON.stringify(entries));
+      input.value = '';
+      const status = document.getElementById('saveStatus');
+      if (status) { status.textContent = '✓ Saved!'; setTimeout(() => status.textContent = '', 2000); }
+      loadEntries();
+    }
+
+    const saveBtn = document.getElementById('saveEntryBtn');
+    if (saveBtn) saveBtn.addEventListener('click', saveEntry);
+    loadEntries();
+  });
+</script>
+</body>
+</html>
