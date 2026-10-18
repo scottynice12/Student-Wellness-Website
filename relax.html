@@ -1,0 +1,215 @@
+<!-- relax.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Wellness Source — Relax</title>
+  <meta name="description" content="A calming breathing tool and a gentle reminder to smile.">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      min-height: 100vh;
+      background-color: #1a2a2a;
+      background-image:
+        radial-gradient(circle at 20% 30%, rgba(210,180,140,0.15) 0%, transparent 30%),
+        radial-gradient(circle at 80% 70%, rgba(140,180,170,0.15) 0%, transparent 35%),
+        radial-gradient(circle at 40% 80%, rgba(200,160,130,0.12) 0%, transparent 40%),
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 300 300"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0.2"/></filter><rect width="300" height="300" filter="url(%23noise)" opacity="0.06"/></svg>');
+      background-blend-mode: overlay, overlay, overlay, normal;
+      font-family: 'Cormorant Garamond', 'Georgia', serif;
+      color: #f0ebe4; line-height: 1.6; display: flex; flex-direction: column;
+    }
+    body::before { content:""; position:fixed; top:0; left:0; right:0; bottom:0; pointer-events:none;
+      background: repeating-linear-gradient(45deg, rgba(255,240,220,0.01) 0px, rgba(255,240,220,0.01) 2px, transparent 2px, transparent 6px);
+      z-index:0; }
+    .nav-container, .main-content, footer { position: relative; z-index: 2; }
+    .nav-container { background: rgba(30,45,45,0.55); backdrop-filter: blur(6px); border-bottom: 1px solid rgba(220,200,170,0.25); box-shadow: 0 8px 20px -8px rgba(0,0,0,0.5); padding: 0.8rem 1.5rem; position: sticky; top: 0; z-index: 30; }
+    .nav-links { max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; }
+    .logo { font-weight: 400; font-size: 1.8rem; letter-spacing: 1px; color: #ebdfd0; text-shadow: 2px 2px 4px rgba(0,0,0,0.5), 0 0 20px rgba(220,200,170,0.3); display: flex; align-items: center; gap: 10px; font-style: italic; }
+    .logo i { color: #b8cfc0; font-size: 1.8rem; filter: drop-shadow(0 0 6px rgba(180,210,190,0.6)); }
+    .nav-menu { display: flex; gap: 2rem; flex-wrap: wrap; }
+    .nav-menu a { text-decoration: none; color: #ede3d6; font-weight: 400; font-size: 1.2rem; padding: 0.3rem 0; border-bottom: 2px solid transparent; transition: 0.25s ease; text-shadow: 1px 1px 3px rgba(0,0,0,0.5); letter-spacing: 0.5px; }
+    .nav-menu a:hover, .nav-menu a.active { border-bottom-color: #cbb89b; color: #fff5e8; text-shadow: 0 0 12px rgba(240,220,180,0.5); }
+    .main-content { max-width: 1200px; margin: 2.5rem auto 2rem; padding: 0 1.8rem; flex: 1; }
+    h1 { font-size: 3rem; margin-bottom: 0.6rem; color: #f3ece2; text-shadow: 3px 3px 8px rgba(0,0,0,0.6), 0 0 30px rgba(200,180,150,0.3); display: flex; align-items: center; gap: 14px; flex-wrap: wrap; font-style: italic; font-weight: 400; }
+    .subhead { font-size: 1.3rem; color: #d8cdbf; margin-bottom: 2.2rem; max-width: 750px; text-shadow: 1px 1px 4px rgba(0,0,0,0.5); font-style: italic; border-left: 4px solid #b09b7e; padding-left: 1.5rem; }
+    .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin: 2.5rem 0; }
+    .wellness-card { background: rgba(45,60,55,0.55); backdrop-filter: blur(8px); border-radius: 28px; padding: 2rem 1.8rem; border: 1px solid rgba(220,200,170,0.3); box-shadow: 0 20px 35px -12px rgba(0,0,0,0.6), inset 0 1px 4px rgba(255,245,230,0.1); transition: transform 0.3s, box-shadow 0.3s, background 0.3s; color: #f2e8dc; display: flex; flex-direction: column; align-items: center; text-align: center; }
+    .wellness-card:hover { transform: translateY(-5px); background: rgba(55,75,70,0.7); box-shadow: 0 28px 45px -12px rgba(0,0,0,0.7), inset 0 1px 8px rgba(255,245,230,0.15); }
+    .wellness-card h3 { font-size: 1.7rem; margin: 0.6rem 0; color: #f5ede2; font-style: italic; font-weight: 400; }
+    .wellness-card h3 i { color: #cbb89b; filter: drop-shadow(0 0 8px rgba(200,180,140,0.4)); margin-right: 8px; }
+    
+    /* Breathing Tool */
+    .breath-circle-container { display: flex; justify-content: center; align-items: center; margin: 2rem 0; min-height: 220px; position: relative; }
+    .breath-circle { width: 150px; height: 150px; border-radius: 50%; background: radial-gradient(circle at 30% 30%, #6a8e7f, #2d4a40); display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 1.1rem; font-weight: 400; color: #f2ede4; text-shadow: 1px 1px 4px black; box-shadow: 0 0 30px rgba(150,180,140,0.4), inset 0 0 20px rgba(0,0,0,0.5); border: 1px solid rgba(230,210,180,0.5); backdrop-filter: blur(2px); z-index: 2; }
+    .breath-timer { font-size: 2rem; font-weight: 500; line-height: 1; margin-top: 4px; color: #fff; }
+    .breath-circle.inhale { transform: scale(1.4); background: radial-gradient(circle at 30% 30%, #8fb7a3, #3c6254); box-shadow: 0 0 50px #aacfbb; transition: transform 4s linear, background 1s, box-shadow 1s; }
+    .breath-circle.hold { transform: scale(1.4); background: radial-gradient(circle at 30% 30%, #8fb7a3, #3c6254); box-shadow: 0 0 50px #aacfbb; }
+    .breath-circle.exhale { transform: scale(1); background: radial-gradient(circle at 30% 30%, #6a8e7f, #2d4a40); transition: transform 4s linear, background 1s; }
+    
+    /* Happy Simulator Specific */
+    .happy-simulator-area { display: flex; flex-direction: column; align-items: center; gap: 1rem; margin: 2rem 0; }
+    .smile-icon { font-size: 6rem; color: #f2d98b; text-shadow: 0 0 25px rgba(240,210,120,0.7); animation: gentle-pulse 4s infinite; }
+    
+    @keyframes gentle-pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+
+    .smile-reminder { font-size: 1.3rem; font-style: italic; color: #d8cdbf; margin-top: 1rem; }
+
+    .verse-companion { margin-top: auto; padding: 1.1rem 1.3rem; border-radius: 20px; background: rgba(35,50,45,0.65); border-left: 6px solid #b09b7e; font-style: italic; color: #f0e7db; font-size: 1.02rem; text-align: left; width: 100%; }
+    .verse-companion .vref { display: block; margin-top: 0.45rem; font-style: normal; color: #cbb89b; font-size: 0.95rem; }
+    
+    footer { text-align: center; padding: 2.2rem 1.5rem 1.8rem; color: #b9ad9a; font-size: 1rem; border-top: 1px solid rgba(200,180,150,0.2); margin-top: 2rem; font-style: italic; text-shadow: 1px 1px 3px black; letter-spacing: 0.5px; }
+    footer a { color: #d4c2a8; text-decoration: none; border-bottom: 1px dotted #b09b7e; }
+    footer a:hover { color: #f5ede2; }
+    @media (max-width: 700px) { .nav-menu { gap: 1.2rem; } h1 { font-size: 2.3rem; } }
+  </style>
+</head>
+<body>
+<div class="nav-container">
+  <div class="nav-links">
+    <div class="logo"><i class="fas fa-leaf"></i> wellness hub</div>
+    <div class="nav-menu">
+      <a href="index.html">🏡 Home</a>
+      <a href="verses.html">📖 Verses</a>
+      <a href="relax.html" class="active">🌬️ Relax</a>
+      <a href="self-love.html">💗 Self‑Love</a>
+    </div>
+  </div>
+</div>
+
+<div class="main-content">
+  <h1><i class="fas fa-wind"></i> Calm & Rest</h1>
+  <p class="subhead">Breathe with the circle or take a moment to simply smile.</p>
+
+  <div class="card-grid">
+    <!-- Breathing Tool (Auto-runs) -->
+    <div class="wellness-card">
+      <h3><i class="fas fa-lungs"></i> Breathing buddy</h3>
+      <p style="font-size:0.95rem; color:#cbb89b; margin-bottom: 0;">Inhale 4s → hold 4s → exhale 4s</p>
+      
+      <div class="breath-circle-container">
+        <div id="breathCircle" class="breath-circle">
+          <span id="breathLabel">Breathe</span>
+          <span id="breathTimer" class="breath-timer">0</span>
+        </div>
+      </div>
+      
+      <div class="verse-companion" id="breathVerse">
+        <i class="fas fa-quote-left" style="color:#cbb89b; margin-right:6px;"></i>
+        <span id="breathVerseText">Be still, and know that I am God.</span>
+        <span class="vref" id="breathVerseRef">— Psalm 46:10</span>
+      </div>
+    </div>
+
+    <!-- Happy Simulator (Just a Smile) -->
+    <div class="wellness-card">
+      <h3><i class="fas fa-face-smile"></i> A gentle reminder</h3>
+      
+      <div class="happy-simulator-area">
+        <div class="smile-icon">😊</div>
+        <div class="smile-reminder">Remember to smile today.</div>
+      </div>
+
+      <div class="verse-companion" id="smileVerse">
+        <i class="fas fa-quote-left" style="color:#cbb89b; margin-right:6px;"></i>
+        <span id="smileVerseText">A cheerful heart is good medicine.</span>
+        <span class="vref" id="smileVerseRef">— Proverbs 17:22</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <i class="fas fa-leaf"></i> Student Wellness Source ·
+  <a href="https://StudentWellnessSource.com">StudentWellnessSource.com</a> ·
+  made with care · all data stays in your browser
+</footer>
+
+<script src="js/verses-data.js"></script>
+<script src="js/app.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // ==========================================
+    // 1. BREATHING TOOL (Auto-starting)
+    // ==========================================
+    const breathVerse = window.wellnessUtils.getVerseByMood('anxious');
+    if (breathVerse) {
+      document.getElementById('breathVerseText').textContent = breathVerse.text;
+      document.getElementById('breathVerseRef').textContent = '— ' + breathVerse.ref;
+    }
+
+    const breathCircle = document.getElementById('breathCircle');
+    const breathLabel = document.getElementById('breathLabel');
+    const breathTimer = document.getElementById('breathTimer');
+    
+    let breathPhase = 0; // 0=Inhale, 1=Hold, 2=Exhale
+    let currentSeconds = 0;
+
+    function nextPhase() {
+      if (breathPhase === 0) {
+        // Transition to Hold
+        breathPhase = 1;
+        breathLabel.textContent = 'Hold...';
+        breathCircle.className = 'breath-circle hold';
+        currentSeconds = 0;
+        breathTimer.textContent = 0;
+      } else if (breathPhase === 1) {
+        // Transition to Exhale
+        breathPhase = 2;
+        breathLabel.textContent = 'Exhale...';
+        breathCircle.className = 'breath-circle exhale';
+        currentSeconds = 0;
+        breathTimer.textContent = 0;
+        
+        // Refresh verse at start of exhale
+        const v = window.wellnessUtils.getVerseByMood('anxious');
+        if (v) {
+          document.getElementById('breathVerseText').textContent = v.text;
+          document.getElementById('breathVerseRef').textContent = '— ' + v.ref;
+        }
+      } else if (breathPhase === 2) {
+        // Transition back to Inhale
+        breathPhase = 0;
+        breathLabel.textContent = 'Inhale...';
+        breathCircle.className = 'breath-circle inhale';
+        currentSeconds = 0;
+        breathTimer.textContent = 0;
+      }
+    }
+
+    // Start auto-breathing on page load
+    breathPhase = 0;
+    breathLabel.textContent = 'Inhale...';
+    breathCircle.className = 'breath-circle inhale';
+
+    // Main phase timer (4 seconds each phase)
+    setInterval(() => {
+      nextPhase();
+    }, 4000);
+
+    // Countdown timer (updates every second)
+    setInterval(() => {
+      currentSeconds++;
+      breathTimer.textContent = Math.min(currentSeconds, 4);
+    }, 1000);
+
+
+    // ==========================================
+    // 2. HAPPY SIMULATOR (Just the verse)
+    // ==========================================
+    const smileVerse = window.wellnessUtils.getVerseByMood('grateful');
+    if (smileVerse) {
+      document.getElementById('smileVerseText').textContent = smileVerse.text;
+      document.getElementById('smileVerseRef').textContent = '— ' + smileVerse.ref;
+    }
+  });
+</script>
+</body>
+</html>
