@@ -1,9 +1,4 @@
-// js/app.js
-// Shared utilities for the Wellness Hub.
-// Includes helpers for daily verse, mood matching, and rendering.
-
 (function () {
-  // --- Utility: escape HTML when rendering user content ---
   function escapeHtml(unsafe) {
     return String(unsafe)
       .replace(/&/g, '&amp;')
@@ -13,13 +8,11 @@
       .replace(/'/g, '&#039;');
   }
 
-  // --- Random verse from shared data ---
   function getRandomVerse() {
     if (typeof versesData === 'undefined' || !versesData.length) return null;
     return versesData[Math.floor(Math.random() * versesData.length)];
   }
 
-  // --- Pick a verse that matches a "mood tag" (used by simulators & journal) ---
   const moodKeywords = {
     anxious: ['anxiety', 'worry', 'afraid', 'fear', 'trust', 'still'],
     sad: ['brokenhearted', 'mourn', 'weep', 'downcast', 'comfort', 'hope'],
@@ -47,7 +40,6 @@
     return matches[Math.floor(Math.random() * matches.length)];
   }
 
-  // --- Render a verse into DOM elements with given ids ---
   function renderVerseInto(textId, refId, verse) {
     const v = verse || getRandomVerse();
     if (!v) return;
@@ -57,12 +49,10 @@
     if (refEl) refEl.textContent = '— ' + v.ref;
   }
 
-  // --- Daily verse render (used on index.html) ---
   function renderDailyVerse(textId, refId) {
     renderVerseInto(textId, refId, getRandomVerse());
   }
 
-  // --- Public API ---
   window.wellnessUtils = {
     escapeHtml: escapeHtml,
     getRandomVerse: getRandomVerse,
